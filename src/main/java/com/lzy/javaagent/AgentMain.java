@@ -11,7 +11,7 @@ import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;
 import java.lang.instrument.Instrumentation;
 import java.security.ProtectionDomain;
-
+//https://github.com/vipinvkmenon/javaagent-example/blob/master/target/javaagent-1.0-SNAPSHOT-jar-with-dependencies.jar
 /**
  * Description:
  *
@@ -19,6 +19,7 @@ import java.security.ProtectionDomain;
  * @version 1.0
  * @since 2017-03-15
  */
+//jar -uf YOURJAR.jar FILE
 public class AgentMain {
 	public static void premain(String agentOps, Instrumentation inst) {
 		instrument(agentOps, inst);
@@ -32,7 +33,8 @@ public class AgentMain {
 		System.out.println(agentOps);
 		inst.addTransformer(new ClassFileTransformer() {
 			public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classfileBuffer) throws IllegalClassFormatException {
-				System.exit(0);
+				System.out.println("Shutting Down!!!!");
+			    System.exit(0);
 				return transformClass(loader, className, classBeingRedefined, protectionDomain, classfileBuffer);
 			}
 		});
