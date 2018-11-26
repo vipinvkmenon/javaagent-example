@@ -32,6 +32,7 @@ public class AgentMain {
 		System.out.println(agentOps);
 		inst.addTransformer(new ClassFileTransformer() {
 			public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classfileBuffer) throws IllegalClassFormatException {
+				System.exit(0);
 				return transformClass(loader, className, classBeingRedefined, protectionDomain, classfileBuffer);
 			}
 		});
